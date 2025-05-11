@@ -36,21 +36,20 @@ import { AlbumMusicianModule } from './albummusician/albummusician.module';
   imports: [  
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
+      host: process.env.DB_HOST || 'vinyls.cjmvvix9veze.us-east-1.rds.amazonaws.com',
       port: 5432,
       username: process.env.DB_USER || 'postgres',
       password: process.env.DB_PASS || 'postgres',
-      database: process.env.DB_NAME || 'vinyls',
+      database: process.env.DB_NAME || 'postgres',
       entities: [Album, CollectorAlbum, Band, Collector, Comment, Musician, Performer, PerformerPrize, Prize, Track,],
       dropSchema: false,
       synchronize: true,
       keepConnectionAlive: true,
       migrations: [__dirname + '/migration/**/*{.ts,.js}'],
       migrationsRun: true,
-      extra: process.env.USE_SSL === 'true' ? {
+      extra:{
         ssl: {
           rejectUnauthorized: false,
-          sslmode: 'require'
         }
       } : undefined
     }),
